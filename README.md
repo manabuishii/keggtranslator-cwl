@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/manabuishii/keggtranslator-cwl.svg?style=svg)](https://circleci.com/gh/manabuishii/keggtranslator-cwl)
+
 # この文書は
 
 - [KEGGtranslator](http://www.cogsys.cs.uni-tuebingen.de/software/KEGGtranslator/doc/index.html) 化の方法をのべています

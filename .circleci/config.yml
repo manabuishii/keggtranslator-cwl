@@ -4,9 +4,9 @@ references:
     setup_repo: &setup_repo
       name: "Git clone"
       command: "git clone $CIRCLE_REPOSITORY_URL /tmp/_circleci_local_build_repo"
-    prepare_data: &prepare_data
+    prepare_data: &prepare_test_data
       name: "Prepare test data"
-      command: "wget -O data/eco00020.xml http://rest.kegg.jp/get/eco00020/kgml"
+      command: "mkdir data && wget -O data/eco00020.xml http://rest.kegg.jp/get/eco00020/kgml"
     build_container: &build_container
       name: "Build KEGGtranslator container"
       command: "docker build -t keggtranslator:2.5 ."
@@ -25,28 +25,28 @@ references:
       name: "Run test"
       command: "sudo cwltest --verbose --test test.yml"
 jobs:
-#   build:
-#     working_directory: /tmp/cwl_test
-#     machine:
-#       image: ubuntu-1604:201903-01
-#     steps:
-#       - run: *setup_repo
-#       - checkout
-#       - run: *prepare_test_data
-#       - run: *build_container
-#       - run: *install_python
-#       - run: *exec_upgrade_pip
-#       - run: *install_cwl_runner
-#       - run: *run_test
+  build:
+    working_directory: /tmp/cwl_test
+    machine:
+      image: ubuntu-1604:201903-01
+    steps:
+      - run: *setup_repo
+      - checkout
+      - run: *prepare_test_data
+      - run: *build_container
+      - run: *install_python
+      - run: *exec_upgrade_pip
+      - run: *install_cwl_runner
+      - run: *run_test
   buildlocal:
     working_directory: /tmp/cwl_test
     machine: true
     steps:
       - run: *setup_repo
-      # - checkout
-      # - run: *prepare_test_data
-      # - run: *build_container
-      # - run: *install_python
-      # - run: *exec_upgrade_pip
-      # - run: *install_cwl_runner
-      # - run: *run_test
+      - checkout
+      - run: *prepare_test_data
+      - run: *build_container
+      - run: *install_python
+      - run: *exec_upgrade_pip
+      - run: *install_cwl_runner
+      - run: *run_test

@@ -1,0 +1,11 @@
+- job: keggtranslator-job.yml
+  tool: keggtranslator.cwl
+  output:
+    output:
+      class: File
+      location: test.xml
+      # size と checksum は実行するたびに変わる
+  label: cl_basic_generation
+  id: 1
+  doc: KEGG 
+  tags: [ command_line_tool ]
